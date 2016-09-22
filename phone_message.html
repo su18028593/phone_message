@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body,p,ul{padding:0;margin:0;}
+        li{list-style:none;margin-bottom:5px;}
+        img{border:0;vertical-align:top;cursor:pointer;}
+        .clearfix{zoom:0;}
+        .clearfix:after{display:block;height:0;content:"";clear:both;}
+        .wrap{margin:50px auto;width:320px;height:320px;}
+        #box{width:300px;height:300px;padding:10px;background:#f1f1f1;}
+        p{line-height:24px;color:#fff;}
+        .list1 p,.list1 img{float:left;}
+        .list1 p{background:green;}
+        .list1 img{margin-right:5px;}
+        .list2 p,.list2 img{float:right;}
+        .list2 p{background:pink;}
+    </style>
+    <script src="jquery-3.1.0.min.js"></script>
+    <script>
+        $( function(){
+            var show = true;
+            $('#pic').click( function(){ //点击切换头像
+                //alert(1);
+                if(show){
+                    $(this).attr('src','img/2.png');
+                    show = !show
+                }else{
+                    $(this).attr('src','img/1.png');
+                    show = !show;
+                }
+            } );
+            $('input[value=发送]').click( function(){ //点击发送文本
+               //alert( $('#text').val() );
+                if($('#text').val()==''){
+                    alert('请输入！！！'); //当输入框为空时，弹出提示
+                } else if( show ){
+                    var $aLi1 = $('<li class="list1 clearfix"><img src="img/1.png"/><p>' + $( '#text' ).val() + '</p></li>');//添加一个li标签
+                    $('ul').append($aLi1); //把li标签添加到ul里面
+                    $('#text').val('');
+                    $('#pic').attr('class','');
+                }else{
+                    var $aLi2 = $('<li class="list2 clearfix"><img src="img/2.png"/><p>' + $( '#text').val() + '</p></li>');
+                    $('ul').append($aLi2);
+                    $('#text').val('');
+                    $('#pic').attr('class','pic1');
+                }
+            } )
+        } )
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <div id="box">
+        <ul>
+            <!--<li class="list1 clearfix">
+                <img src="img/1.png"/><p>你好！！！</p>
+            </li>
+            <li class="list2 clearfix">
+                <img src="img/2.png"/><p>我不好啊！！！</p>
+            </li>-->
+        </ul>
+    </div>
+    <img id="pic" src="img/1.png" class="pic1" />
+    <input id="text" type="text"/>
+    <input type="button" value="发送" />
+</div>
+</body>
+</html>
